@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 
 # Load the trained model
-model = load_model(r'C:\Users\Sanjeev\Documents\BT Detection\brain_tumor_vgg16.h5')
+model = load_model("brain_tumor_vgg16.h5")
 
 # Class labels
 class_labels = ['glioma', 'meningioma', 'notumor', 'pituitary']
@@ -64,5 +64,7 @@ def index():
 def get_uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
